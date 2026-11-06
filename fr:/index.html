@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // Ancienne adresse non sécurisée : bascule vers la version HTTPS
+        if (location.hostname === 'patrick.montreuil.free.fr') {
+            location.replace('https://patrick-montreuil.pages-perso.free.fr' + location.pathname + location.search + location.hash);
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO & Indexation -->
+    <title>Location gîte à Lézardrieux, Côtes-d'Armor | Près de Bréhat et du GR34</title>
+    <meta name="description" content="Gîte de charme pour 2 personnes à Lézardrieux, entre Paimpol et l'île de Bréhat. Séjour au calme près du GR34 et des plages. Demandez vos dates en ligne.">
+    <link rel="canonical" href="https://patrick-montreuil.pages-perso.free.fr/fr/">
+
+    <!-- Gestion Multilingue (SEO Bilingue) -->
+    <link rel="alternate" hreflang="fr" href="https://patrick-montreuil.pages-perso.free.fr/fr/">
+    <link rel="alternate" hreflang="en" href="https://patrick-montreuil.pages-perso.free.fr/en/">
+    <link rel="alternate" hreflang="de" href="https://patrick-montreuil.pages-perso.free.fr/de/">
+    <link rel="alternate" hreflang="x-default" href="https://patrick-montreuil.pages-perso.free.fr/fr/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:locale:alternate" content="en_GB">
+    <meta property="og:site_name" content="Location Vacances Lézardrieux">
+    <meta property="og:title" content="Location Vacances Lézardrieux | Gîte en Côtes-d'Armor">
+    <meta property="og:description" content="Maison de vacances proche de Paimpol et Bréhat. Séjour au calme proche de la mer.">
+    <meta property="og:url" content="https://patrick-montreuil.pages-perso.free.fr/fr/">
+    <meta property="og:image" content="https://patrick-montreuil.pages-perso.free.fr/images/ete-port.jpg">
+    <meta property="og:image:alt" content="Vue sur le port de Lézardrieux et l'estuaire du Trieux">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Location Vacances Lézardrieux | Gîte en Côtes-d'Armor">
+    <meta name="twitter:description" content="Maison de vacances proche de Paimpol et Bréhat. Séjour au calme proche de la mer.">
+    <meta name="twitter:image" content="https://patrick-montreuil.pages-perso.free.fr/images/ete-port.jpg">
+
+<!-- Bibliothèques FullCalendar et iCal fixes -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.10/index.global.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.10/locales/fr.global.min.js"></script>
+<style>
+        :root {
+            --primary: #1e3a8a;      /* Bleu marine profond */
+            --primary-light: #eff6ff;/* Fond bleu très doux */
+            --accent: #d97706;       /* Rehaut chaleureux/ambré */
+            --text-main: #1f2937;    /* Gris foncé lisible */
+            --text-muted: #4b5563;   /* Gris intermédiaire */
+            --bg-body: #f9fafb;      /* Fond clair */
+            --bg-card: #ffffff;      /* Blanc pur */
+            --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            text-align: justify; /* Justifie l'ensemble des textes du site */
+        }
+
+        /* --- En-tête & Navigation --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .navbar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- Gestion du sous-menu déroulant (Dropdown) --- */
+.nav-links li.dropdown {
+    position: relative; /* Permet d'aligner le sous-menu par rapport à cet élément */
+}
+
+.dropdown-toggle .arrow {
+    font-size: 0.75rem;
+    margin-left: 3px;
+    transition: transform 0.2s ease;
+}
+
+/* Le menu caché par défaut */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: #ffffff;
+    min-width: 240px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius, 10px);
+    padding: 0.6rem 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index: 1000;
+    border: 1px solid #f3f4f6;
+}
+
+/* Affichage au survol de la souris */
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown:hover .dropdown-toggle .arrow {
+    transform: rotate(180deg);
+}
+
+/* Liens à l'intérieur du sous-menu */
+.dropdown-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    color: var(--text-main, #1f2937) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500;
+    white-space: nowrap;
+    text-align: left;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-menu li a:hover {
+    background-color: var(--primary-light, #eff6ff);
+    color: var(--primary, #1e3a8a) !important;
+}
+
+/* --- Adaptation Responsive pour Mobile & Tablette --- */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        transform: none !important;
+        box-shadow: none;
+        border: none;
+        background-color: var(--primary-light, #eff6ff);
+        min-width: 100%;
+        display: none; /* Masqué sur mobile sauf si ouvert */
+        opacity: 1;
+        visibility: visible;
+        margin-top: 0.5rem;
+        border-radius: 8px;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+        display: block;
+    }
+}
+
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .lang-switch {
+            background-color: var(--primary-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem !important;
+            color: var(--primary) !important;
+            border: 1px solid rgba(30, 58, 138, 0.1);
+            text-align: center;
+        }
+
+        /* --- Disposition Générale --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 3.5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.85rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* --- Section Hero (Bannière) --- */
+        .hero {
+            text-align: center;
+            padding: 4rem 1.5rem 3rem;
+            background: linear-gradient(180deg, #ffffff 0%, var(--bg-body) 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #ffffff;
+            padding: 0.85rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #b45309;
+            transform: translateY(-2px);
+        }
+
+        /* --- Diaporama --- */
+        .slider-container {
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            background: #000;
+        }
+
+        .slides {
+            display: flex;
+            width: 100%;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+    
+
+        .slide img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+            color: #ffffff;
+            padding: 1.5rem 1rem 0.8rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-main);
+            border: none;
+            font-size: 1.5rem;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: background 0.2s;
+        }
+
+        .slider-btn:hover {
+            background: #ffffff;
+        }
+
+        .prev { left: 15px; }
+        .next { right: 15px; }
+
+        .dots-container {
+            text-align: center;
+            padding: 12px 0;
+            background: #ffffff;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #d1d5db;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+
+
+        .mini-slider {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            border-radius: var(--radius) var(--radius) 0 0;
+            background: #000;
+        }
+
+        .mini-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .mini-slide.active {
+            opacity: 1;
+        }
+
+        .mini-prev, .mini-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 5;
+            font-size: 1rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .mini-prev:hover, .mini-next:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .mini-prev { left: 8px; }
+        .mini-next { right: 8px; }
+
+        /* --- Grille des Points Forts --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #f3f4f6;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.15rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- Section Contact & Carte --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #f3f4f6;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .contact-info strong {
+            color: var(--text-main);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 280px;
+            border: 0;
+            border-radius: 8px;
+        }
+
+        /* --- Pied de page --- */
+        footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e5e7eb;
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .slide img {
+                height: 300px;
+            }
+        }
+        
+        main a {
+            color: var(--accent, #d97706);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        main a:hover {
+            color: var(--primary, #1e3a8a);
+        }
+        
+
+        /* --- Grille des 4 Saisons (2x2) --- */
+.seasons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes égales */
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.season-card {
+    background: var(--bg-card, #ffffff);
+    border-radius: var(--radius, 12px);
+    overflow: hidden;
+    box-shadow: var(--shadow, 0 4px 20px -2px rgba(0, 0, 0, 0.08));
+    border: 1px solid #f3f4f6;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.season-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.12);
+}
+
+.season-header {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.season-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.season-card:hover .season-header img {
+    transform: scale(1.05); /* Effet de zoom très doux au survol */
+}
+
+.season-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    color: var(--primary, #1e3a8a);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.season-content {
+    padding: 1.5rem;
+}
+
+.season-content h3 {
+    color: var(--primary, #1e3a8a);
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+}
+
+.season-content p {
+    color: var(--text-muted, #4b5563);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* --- Adaptation Mobile (1 seule colonne) --- */
+@media (max-width: 768px) {
+    .seasons-grid {
+        grid-template-columns: 1fr; /* Bascule automatique sur 1 colonne sur smartphone */
+        gap: 1.5rem;
+    }
+    .season-header {
+        height: 180px;
+    }
+}
+
+/* Styles pour les mini-diaporamas de saisons */
+.mini-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.mini-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.mini-slide.active {
+    opacity: 1;
+}
+
+/* Flèches légères sur l'image */
+.mini-prev, .mini-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    z-index: 2;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.mini-slider:hover .mini-prev,
+.mini-slider:hover .mini-next {
+    opacity: 1;
+}
+
+.mini-prev { left: 8px; }
+.mini-next { right: 8px; }
+
+
+/* --- Styles pour les fiches (Restaurants & Plages) --- */
+.restaurant-info {
+    font-size: 0.9rem;
+    color: var(--text-muted, #4b5563);
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.restaurant-info a {
+    color: var(--primary, #1e3a8a);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.restaurant-info a:hover {
+    text-decoration: underline;
+    color: var(--accent, #d97706);
+}
+
+.amenities-list {
+    margin-top: 0.8rem;
+    padding-left: 1.2rem;
+    font-size: 0.9rem;
+    color: var(--text-muted, #4b5563);
+}
+
+.amenities-list li {
+    margin-bottom: 0.3rem;
+}
+
+
+/* Style du formulaire de réservation */
+.form-reservation {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-family: inherit;
+}
+
+.form-reservation h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #3182ce;
+    outline: none;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: #2b6cb0;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #2c5282;
+}
+
+    
+/* --- Corrections : lisibilité, contraste, mobile, focus --- */
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body { text-align: left; }
+.btn-primary { background-color: #b45309; }
+.btn-primary:hover { background-color: #92400e; }
+main a { color: #b45309; }
+main a:hover { color: var(--primary, #1e3a8a); }
+.dot { border: 0; padding: 0; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.consent { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+.form-reservation h3 { color: var(--primary); }
+.btn-submit { background-color: var(--primary); }
+.btn-submit:hover { background-color: #172554; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+@media (max-width: 768px) {
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *:not(.slides) { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="brand">Gîte à Lézardrieux</a>
+            <ul class="nav-links">
+                <li><a href="#galerie">Photos</a></li>
+                <li><a href="#atouts">Le gîte</a></li>
+                <li><a href="#infos">Infos pratiques</a></li>
+                <li class="dropdown">
+                     <a href="#alentour" class="dropdown-toggle">Aux alentours<span class="arrow">▾</span></a>
+                     <ul class="dropdown-menu">
+                         <li><a href="#restaurants">🍽️ Les restaurants</a></li>
+                         <li><a href="#plages">🏖️ Les plages</a></li>
+                         <li><a href="#balades">🚶 Les balades</a></li>
+                        <li><a href="#marches">🧺 Les marchés</a></li>    
+                        <li><a href="#trieux">⚓ L'estuaire du Trieux</a></li>
+                        <li><a href="#autre">Quoi d'autre ?</a></li>                       
+                     </ul>
+                </li>
+                <li><a href="#saisons">Les quatre saisons</a></li>
+                <li><a href="#contact">Contact & accès</a></li>
+                <li class="lang-switch"><a href="../en/index.html" hreflang="en" lang="en">🇬🇧 EN</a></li>
+                <li class="lang-switch"><a href="../de/index.html" hreflang="de" lang="de">🇩🇪 DE</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Banner Hero -->
+        <section id="accueil" class="hero">
+            <div class="container">
+                <h1>Location de vacances à Lézardrieux — Le gîte du pêcheur</h1>
+                <h2>Charmante maison en pierre en Côtes-d'Armor</h2>
+                <p>Maison en pierre pleine de charme à Lézardrieux, dans les Côtes-d'Armor, en Bretagne, idéalement située pour explorer la presqu'île sauvage, randonner sur le GR34 (le fameux "sentier des douaniers"), visiter Paimpol et l'île de Bréhat.</p>
+                <p style="font-weight: 600; color: #b45309; margin-bottom: 1.5rem;">✨ Réservez en direct : zéro frais de commission, contact direct avec nous et, de fait, meilleur tarif garanti !</p>
+                <a href="#contact" class="btn-primary">Demander une réservation</a>
+            </div>
+        </section>
+
+        <!-- Diaporama Photos -->
+        <section id="galerie">
+            <div class="container">
+                <h2 class="section-title">Des vacances authentiques</h2>
+                <p class="section-subtitle">Découvrez le cadre et les espaces de votre futur séjour</p>
+                
+                <div class="slider-container">
+                    <div class="slides" id="slider">
+                        <div class="slide">
+                            <img fetchpriority="high" src="../images/facade.jpg" alt="Façade en pierre traditionnellement bretonne du gîte à Lézardrieux">
+                            <div class="caption">Maison traditionnelle en pierre</div>
+                        </div>   
+                        <div class="slide">
+                            <img loading="lazy" decoding="async" src="../images/salon-bas.jpg" alt="Salon lumineux et espace de vie du gîte du pêcheur">
+                            <div class="caption">Espace de vie cocooning</div>
+                        </div>
+                        <div class="slide">
+                            <img fetchpriority="high" src="../images/cuisine1.jpg" alt="La cuisine est plutôt une kitchenette">
+                            <div class="caption">La cuisine</div>
+                        </div>   
+                        <div class="slide">
+                            <img loading="lazy" decoding="async" src="../images/salon-haut.png" alt="Espace détente et petit salon à l'étage de la maison de vacances">
+                            <div class="caption">Petit salon à l'étage</div>
+                        </div>
+                        <div class="slide">
+                            <img loading="lazy" decoding="async" src="../images/chambre.jpg" alt="Chambre avec lit double pour votre séjour en Côtes-d'Armor">
+                            <div class="caption">Chambre principale</div>
+                        </div>
+                        <div class="slide">
+                            <img loading="lazy" decoding="async" src="../images/jardin.jpg" alt="Jardin caché de la route et terrasse aménagée à Lézardrieux">
+                            <div class="caption">Jardin et terrasse au calme</div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="slider-btn prev" aria-label="Photo précédente" onclick="moveSlide(-1)">&#10094;</button>
+                    <button type="button" class="slider-btn next" aria-label="Photo suivante" onclick="moveSlide(1)">&#10095;</button>
+
+                    <div class="dots-container">
+                        <button type="button" class="dot active" aria-label="Photo 1" onclick="currentSlide(0)"></button>
+                        <button type="button" class="dot" aria-label="Photo 2" onclick="currentSlide(1)"></button>
+                        <button type="button" class="dot" aria-label="Photo 3" onclick="currentSlide(2)"></button>
+                        <button type="button" class="dot" aria-label="Photo 4" onclick="currentSlide(3)"></button>
+
+                        <button type="button" class="dot" aria-label="Photo 5" onclick="currentSlide(4)"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Points Forts du Gîte -->
+        <section id="atouts" style="background-color: #ffffff;">
+            <div class="container">
+                <h2 class="section-title">Une maison de charme pour vos vacances à Lézardrieux</h2>
+                <p class="section-subtitle">Pour votre location de vacances, nous vous proposons ce ravissant petit gîte, à deux pas de Lézardrieux et donc de la mer, maisonnette de pêcheur typique de la région. Elle peut accueillir jusqu’à deux personnes.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>🌿 Calme & nature</h3>
+                        <p>En hauteur de la ville, elle possède un jardin caché de la route. La terrasse vous permettra de profiter du soleil au moment du repas aussi bien que pour la sieste, prisée par beaucoup en période de vacances. Un endroit atypique de nos jours, puisque vous n’y trouverez ni télévision ni wifi… mais il y a des livres.. et la 5G fonctionne bien. C'est un environnement paisible à deux pas du Trieux, idéal pour se ressourcer et profiter du jardin privatif.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚓ Emplacement idéal</h3>
+                        <p>Notre location de vacances, Le gîte du pêcheur est cependant à dix minutes à pied seulement de Lézardrieux et de son centre-ville… et donc de ses commerces : boulangerie, tabac-presse, cave, superette. Chaque vendredi, un <a href="#marches">marché</a> vient également y prendre place. C’est l’occasion de goûter les produits locaux et de vous fournir en fruits et légumes frais, en poissons fraîchement pêchés, etc.<br>
+
+                        Le <a href="https://www.ffrandonnee.fr/randonner/sentiers/gr-34-le-sentier-des-douaniers">GR34, également appelé sentier des douaniers</a>, se trouve à proximité de notre maison. Il serpente le long du littoral breton sur environ deux mille kilomètres du port de Saint-Nazaire au Mont Saint-Michel.<br>
+
+                        À une quinzaine de minutes à pied, le <a href="#trieux">port de plaisance</a> avec une capacité d’accueil de cinq cents bateaux.<br>
+
+                        À une quinzaine de minutes en voiture, l’Arcouest, à Paimpol – lieu d’embarquement sur les <a href="https://www.vedettesdebrehat.com/-Traversee-tour-de-l-ile-de-Brehat-">navettes pour l’île de Bréhat</a> – et à une dizaine de minutes en voiture, Paimpol.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🏡 Équipement et description du gîte</h3>
+                        <p>Au rez-de-chaussée, une pièce de vie avec une table de 2-3 personnes avec 3 chaises, deux fauteuils, et un insert (pour les mois d’hiver).<br>
+
+                        Elle comprend une cuisine équipée avec les éléments de base d’une cuisine : réfrigérateur, minifour, cafetière Bialetti, plaques de cuisson au gaz…<br>
+
+                        Également attenante au salon, se trouve la salle de bain (douche, lavabo, WC…)<br>
+
+                        À l’étage, la chambre ainsi qu’un second salon plus petit avec un coin bureau et un canapé 1 place si besoin.<br>
+
+                        Une terrasse : des chaises et une table pour prendre vos repas à l’extérieur, coin tranquille également pour vous reposer sur les transats à l’ombre des arbres.</p>
+
+                        <p>Linge de maison fourni (une serviette de toilette par personne, torchons) : le lit est fait à votre arrivée.<br>
+
+                        Possibilité de se garer.<br>
+
+                        Une chaîne Hi-fi stéréo est à votre disposition.<br>
+
+                        Une laverie au magasin U, à proximité du gîte.<br>
+
+                        Chaise haute pour bébé et lit parapluie disponibles sur demande.<br>
+
+                        Bois sur demande pour les mois d'hiver.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<!-- Contact & Localisation -->
+<section id="contact" style="background-color: #f9f9f9;">
+    <div class="container">
+        <h2 class="section-title">Disponibilités &amp; Contact</h2>
+        <p class="section-subtitle">N'hésitez pas à nous contacter pour préparer votre séjour ou obtenir des informations sur les tarifs et disponibilités.</p>
+
+        <div class="contact-grid">
+            <div class="card contact-info">
+                <h3>Réserver votre séjour</h3>
+                <p>Pour vérifier les disponibilités ou obtenir un devis personnalisé selon la période :</p>
+
+        <div style="background-color: #eff6ff; border-left: 4px solid #1e3a8a; padding: 12px; margin: 15px 0; border-radius: 4px; font-size: 0.95rem;">
+            <strong>Pourquoi réserver en direct ?</strong><br>
+            En passant par notre site, vous traitez directement avec nous, les propriétaires : <strong>aucun frais de commission (OTA)</strong> prélevé par des intermédiaires, des échanges directs par mail, c'est quand même plus sympa !
+        </div>
+                
+                <p style="margin-top: 1rem;">📧 Email : <strong><a href="mailto:lesgitesdupecheur.lezardrieux@gmail.com">lesgitesdupecheur.lezardrieux@gmail.com</a></strong></p>
+                <p>📍 Adresse : <strong>Lézardrieux, Côtes-d'Armor (22), Bretagne, France</strong></p>
+                
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);"><em>Nous vous répondons rapidement sous 24h.</em></p>
+            </div>
+
+            <div class="card map-container">
+                <h3>Situation géographique</h3>
+                <iframe loading="lazy" 
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=-3.1100%2C48.7800%2C-3.0900%2C48.8000&amp;layer=mapnik&amp;marker=48.786%2C-3.102" 
+                    title="Carte de localisation du gîte à Lézardrieux"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+<!-- Calendrier des disponibilités -->
+<div id="calendar-container" style="max-width: 800px; margin: 30px auto; padding: 15px; background: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    <h3 style="text-align: center; color: var(--primary); margin-bottom: 20px;">Disponibilités du gîte</h3>
+    <div id="calendar"></div>
+    <p id="calendar-note" style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 0.75rem;">Les périodes en rouge sont déjà réservées. Pour les autres dates, envoyez-nous une demande ci-dessous.</p>
+</div>
+
+    <!-- Formulaire de réservation formsubmit.io -->
+
+<form action="https://formsubmit.co/lesgitesdupecheur.lezardrieux@gmail.com" method="POST" class="form-reservation">
+
+    <!-- Sujet personnalisé pour ton e-mail -->
+    <input type="hidden" name="_subject" value="Nouvelle demande de réservation - Gîte Lézardrieux">
+
+    <!-- Captcha activé pour éviter les robots -->
+    <input type="hidden" name="_captcha" value="true">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://patrick-montreuil.pages-perso.free.fr/fr/merci.html">
+    <input type="text" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off">
+
+    <div class="form-group">
+        <label for="checkin">Date d'arrivée :</label>
+        <input type="date" id="checkin" name="checkin" required>
+    </div>
+
+    <div class="form-group">
+        <label for="checkout">Date de départ :</label>
+        <input type="date" id="checkout" name="checkout" required>
+    </div>
+
+    <div class="form-group">
+        <label for="voyageurs">Nombre de personnes :</label>
+        <select id="voyageurs" name="voyageurs">
+            <option value="1">1 personne</option>
+            <option value="2">2 personnes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="nom">Nom & Prénom :</label>
+        <input type="text" id="nom" name="nom" autocomplete="name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email">E-mail :</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="telephone">Téléphone :</label>
+        <input type="tel" id="telephone" name="telephone" autocomplete="tel">
+    </div>
+
+    <div class="form-group">
+        <label for="message">Message ou demande particulière :</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+    </div>
+
+    <p class="consent">En envoyant ce formulaire, vous acceptez que vos données (nom, e-mail, téléphone, dates) soient utilisées uniquement pour répondre à votre demande.</p>
+
+    <button type="submit" class="btn-submit">Envoyer ma demande</button>
+</form>
+
+    </div>
+</section>
+
+
+ 
+
+        <!-- Section Aux Alentours -->
+        <section id="alentour">
+            <div class="container">
+                <h2 class="section-title">Découvrir la région</h2>
+                <p class="section-subtitle">Toutes nos bonnes adresses à Lézardrieux et dans le Trégor / Goëlo</p>
+            </div>
+        </section>
+
+<!-- Les Restaurants -->
+<section id="restaurants" style="background-color: #ffffff;">
+    <div class="container">
+        <h2 class="section-title">🍽️ Restaurants &amp; Produits locaux</h2>
+        <p class="section-subtitle">Découvrez les crêperies traditionnelles, les terrasses sur le port de Lézardrieux et les dégustations de fruits de mer au bord du Trieux.</p>
+
+        <div class="features-grid">
+            <!--div class="feature-card">
+                <h3>🍽️ Le Chaudron Gourmand de Yaya</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=2+Allee+des+Marronniers+22740+Lezardrieux" target="_blank" rel="noopener">2 Allée des Marronniers, Lézardrieux</a><br>
+                    Site Web : <a href="https://chaudron-gourmand-de-yaya-restaurant.eatbu.com" target="_blank" rel="noopener">j'y vais.</a><br>
+                    🚶 450 m (6 min à pied) — 📞 <a href="tel:0765501000">07 65 50 10 00</a></p>
+                <p>Cuisine savoureuse à base de produits locaux. Les menus évoluent au fil des saisons dans une ambiance conviviale. Réservation conseillée.</p>
+            </div-->
+
+            <div class="feature-card">
+                <h3>⚓ Le Palm</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Rue+du+Port+22740+Lezardrieux" target="_blank" rel="noopener">Rue du Port, Lézardrieux</a><br>
+                    Insta : <a href="https://www.instagram.com/lepalm.lezardrieux/" target="_blank" rel="noopener">J'y vais</a><br>
+                    🚶 750 m (9 min à pied)
+                </p>
+                <p>Une vue dégagée sur l'estuaire du Trieux. Nouveaux propriétaires en mai 2026. Non testé.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🍷 L'Auberge du Trieux</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=1+Impasse+du+Four+Neuf+22740+Lezardrieux" target="_blank" rel="noopener">1 Impasse du Four Neuf, Lézardrieux</a><br>
+                   Site Web : <a href="https://auberge-du-trieux.com/" target="_blank" rel="noopener">J'y vais.</a><br>
+                    🚶 1,2 km (12 min à pied) — 📞 <a href="tel:0296201070">02 96 20 10 70</a>
+                </p>
+                <p>Table gastronomique proposant une cuisine inventive axée sur les produits locaux entre terre et mer, dans un cadre raffiné.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🦪 Les huitres de Saint-Riom</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.app.goo.gl/wros4JyA8Y5xgMRa9" target="_blank" rel="noopener">8 Min er Goas, 22610 Lanmodez</a><br>
+                    Site Web :<a href="https://www.huitrepaimpol.fr/" target="_blank" rel="noopener">J'y vais.</a><br>
+                    🚗 2,4 km (5 min en voiture / 28 min à pied) — 📞 <a href="tel:0296222847">02 96 22 28 47</a>
+                </p>
+                <p>Dégustation sur le pouce d'huîtres et coquillages ultra-frais accompagnés d'un verre de vin blanc, directement au bord de l'eau.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🥞 La Crêperie du Moulin à Mer</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=1+Rue+du+Moulin+a+Mer+22740+Lezardrieux" target="_blank" rel="noopener">1 Rue du Moulin à Mer, Lézardrieux</a><br>
+                    🚗 2 km (4 min en voiture / 26 min à pied) — 📞 <a href="tel:0296201949">02 96 20 19 49</a>
+                </p>
+                <p>Crêperie bretonne traditionnelle nichée dans un cadre charmant et paisible. Idéal pour savourer de véritables galettes de sarrasin.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🥞 Lez'Ar Dreo</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=5+Place+du+Centre+22740+Lezardrieux" target="_blank" rel="noopener">5 Place du Centre, Lézardrieux</a><br>
+                    Site Web : <a href="https://creperie-lezardreo.com/" target="_blank" rel="noopener">J'y vais.</a><br>
+                    🚶 750 m (10 min à pied)
+                </p>
+                <p>Crêperie accueillante située sur la place du village, proposant des galettes et crêpes élaborées avec des ingrédients locaux de qualité.</p>
+            </div>
+
+            <!--div class="feature-card">
+                <h3>🍕 Pizzeria Sant'Angelo</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=6+Rue+du+8+Mai+1945+22740+Lezardrieux" target="_blank" rel="noopener">6 Rue du 8 Mai 1945, Lézardrieux</a><br>
+                    🚶 800 m (11 min à pied) — 📞 <a href="tel:0296221713">02 96 22 17 13</a>
+                </p>
+                <p>Pizzeria artisanale au cœur du bourg pour une restauration rapide sur place ou à emporter.</p>
+            </div-->
+
+            <!--div class="feature-card">
+                <h3>🍲 L'Auberge des Quatre Vents</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=11+Avenue+du+Tregor+22740+Lezardrieux" target="_blank" rel="noopener">11 Avenue du Trégor, Lézardrieux</a><br>
+                    🚶 1,6 km (22 min à pied) — 📞 <a href="tel:0296221314">02 96 22 13 14</a>
+                </p>
+                <p>Cuisine traditionnelle de terroir proposant des formules du jour et des spécialités régionales.</p>
+            </div-->
+
+            <div class="feature-card">
+                <h3>🍕 Gang of Pizza (Distributeur)</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=22740+Lezardrieux" target="_blank" rel="noopener">Zone commerciale, Lézardrieux</a><br>
+                    🚗 1,8 km (3 min en voiture)
+                </p>
+                <p>Distributeur automatique de pizzas artisanales accessibles 24h/24 et 7j/7.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+ <!-- Les Plages -->
+<section id="plages" style="background-color: #f9f9f9;">
+    <div class="container">
+        <h2 class="section-title">🏖️ Les Plages &amp; Criques</h2>
+        <p class="section-subtitle">Les Bretons se baignent en toute saison… Mais contrairement aux restaurants, si vous trouvez une petite crique tranquille, chuuuut… gardez-le pour vous !</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🏖️ Plage de Traou Treiz (Plage de Lézardrieux)</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Rue+de+Traou+Treiz+22740+Lezardrieux" target="_blank" rel="noopener">Rue de Traou Treiz, Lézardrieux</a><br>
+                    🚶 1,1 km (15 min à pied)
+                </p>
+                <p>Plage familiale de sable exposée Sud-Est (environ 300 m) au bord du Trieux, offrant une superbe vue sur le pont suspendu.</p>
+                <ul class="amenities-list">
+                    <li>Baignade possible à partir de la mi-marée haute</li>
+                    <li>Douches et WC disponibles</li>
+                    <li>Parking à 100 m</li>
+                    <li>Chiens interdits toute l'année</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>🏖️ Plage du Lédano</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Chemin+du+Ledano+22500+Paimpol" target="_blank" rel="noopener">Chemin du Lédano, Paimpol</a><br>
+                    🚗 2,1 km (5 min en voiture / 28 min à pied)
+                </p>
+                <p>Anse de sable très prisée pour la pratique de la planche à voile à marée basse.</p>
+                <p><em>⚠️ Vigilance : L'accès et la baignade peuvent faire l'objet de restrictions temporaires en été en raison de la présence d'algues vertes en décomposition.</em></p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🏖️ Plage de Traou Vilin</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Chemin+du+Trieux+22500+Paimpol" target="_blank" rel="noopener">Chemin du Trieux, Paimpol</a><br>
+                    🚗 5,1 km (10 min en voiture)
+                </p>
+                <p>Crique paisible nichée au creux de l'estuaire du Trieux, idéale pour une halte calme le long du littoral.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🏖️ Plage de la Tossen</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Plage+de+la+Tossen+22500+Paimpol" target="_blank" rel="noopener">Paimpol (près du port)</a><br>
+                    🚗 9,1 km (14 min en voiture)
+                </p>
+                <p>Petite plage de sable dotée d'un bassin de retenue d'eau de mer permettant la baignade à toute heure, indépendamment de la marée.</p>
+                <ul class="amenities-list">
+                    <li>Baignade surveillée en juillet et août</li>
+                    <li>Accès direct au GR34 et au centre-ville de Paimpol</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>🏖️ Plage de Roc'h Hir</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Plage+de+Roc'h+Hir+22620+Loguivy-de-la-Mer" target="_blank" rel="noopener">Loguivy-de-la-Mer</a><br>
+                    🚗 9,3 km (16 min en voiture)
+                </p>
+                <p>Plage de sable conviviale abritant le centre nautique local.</p>
+                <ul class="amenities-list">
+                    <li>Location de kayaks, planches à voile et dériveurs</li>
+                    <li>Cadre idéal pour les activités nautiques en famille</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>🏖️ Plage du Gouern</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Route+de+la+baie+22620+Ploubazlanec" target="_blank" rel="noopener">Route de la Baie, Ploubazlanec</a><br>
+                    🚗 9,7 km (15 min en voiture)
+                </p>
+                <p>Plage sauvage et préservée offrant un magnifique panorama sur la baie de Paimpol et l'archipel de Bréhat.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Les Balades -->
+<section id="balades" style="background-color: #ffffff;">
+    <div class="container">
+        <h2 class="section-title">🚶 Idées de balades &amp; Incontournables</h2>
+        <p class="section-subtitle">Entre randonnées sur le GR34, cités de caractère et sites naturels spectaculaires, découvrez les plus beaux panoramas autour de Lézardrieux.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🏝️ L'île de Bréhat</h3>
+                <p class="restaurant-info">
+                    📍 Embarcadère de l'Arcouest (Ploubazlanec)<br>
+                    🚗 15 min en voiture depuis le gîte + 10 min de traversée
+                </p>
+                <p>Surnommée l'île aux fleurs, Bréhat se parcourt à pied ou à vélo. L'île Sud séduit par son bourg animé, ses jardins exotiques et ses plages. L'île Nord, plus sauvage, offre des paysages bretons préservés aux rochers sculptés par la mer.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🌾 Le sillon de Talbert</h3>
+                <p class="restaurant-info">
+                    📍 Pleubian — 🚗 12 km (15 min en voiture)
+                </p>
+                <p>Curiosité géologique unique en Europe, cette langue de galets s'avance de 3,2 km dans la mer. Un site naturel d'exception idéal pour l'observation des oiseaux et la marche au grand air. <em>Attention à marée montante !</em></p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🪨 La côte de Granit Rose</h3>
+                <p class="restaurant-info">
+                    📍 Trégastel &amp; Ploumanac'h — 🚗 40 km (45 min en voiture)
+                </p>
+                <p>Ses impressionnants blocs de granit rose sculptés par les éléments jalonnent la côte. Un décor féerique le long du sentier des douaniers (GR34). Notre coup de cœur : la presqu'île Renote à Trégastel à marée haute.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🌊 La presqu'île Sauvage</h3>
+                <p class="restaurant-info">
+                    📍 Autour de Lézardrieux &amp; Pleubian
+                </p>
+                <p>Beaucoup plus secrète et authentique que la Côte de Granit Rose, la Presqu'île Sauvage propose de magnifiques itinéraires côtiers à l'écart des flux touristiques majeurs.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🌊 Le gouffre de Plougrescant</h3>
+                <p class="restaurant-info">
+                    📍 Plougrescant — 🚗 20 km (25 min en voiture)
+                </p>
+                <p>Une impressionnante faille rocheuse où la mer s'engouffre avec fracas. Les jours de coup de vent, le spectacle est magique ! Vous y découvrirez également la célèbre petite maison encastrée entre deux rochers de granit.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>⛪ La chapelle Saint-Maudez de Kermouster</h3>
+                <p class="restaurant-info">
+                    📍 Hameau de Kermouster, Lézardrieux<br>
+                    🚗 5 km (7 min en voiture / accessible via le GR34)
+                </p>
+                <p>Édifice du XIIe siècle surplombant l'estuaire du Trieux avec une vue imprenable sur l'archipel de Bréhat. Visites guidées proposées en juillet et août (de 14h à 19h, sauf le lundi).</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Les Marchés -->
+<section id="marches" style="background-color: #f9f9f9;">
+    <div class="container">
+        <h2 class="section-title">🧺 Les marchés locaux</h2>
+        <p class="section-subtitle">Incontournables pendant les vacances ! Découvrez les spécialités bretonnes, légumes frais et arrivages de poissons sur les marchés du Trégor et du Goëlo.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🧺 Lézardrieux (au plus près !)</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Place+de+l'Eglise+22740+Lezardrieux" target="_blank" rel="noopener">Place du Centre, Lézardrieux</a><br>
+                    🚶 10 min à pied depuis le gîte<br>
+                    🗓️ <strong>Tous les vendredis matin</strong> (8h – 13h)
+                </p>
+                <p>Le marché du bourg, idéal pour faire ses courses à pied : fruits, légumes, poissons frais et produits du terroir.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🧺 Paimpol</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Place+du+Martray+22500+Paimpol" target="_blank" rel="noopener">Centre-ville &amp; Place du Martray, Paimpol</a><br>
+                    🚗 6 km (10 min en voiture)<br>
+                    🗓️ <strong>Mardi matin</strong> (8h – 13h)
+                </p>
+                <p>Un grand marché très animé s'étendant sur les places du Martray, des Halles, de la Vieille Tour ainsi que dans la rue Saint-Vincent.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🧺 Tréguier</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Place+des+Halles+22220+Treguier" target="_blank" rel="noopener">Place des Halles &amp; Quais, Tréguier</a><br>
+                    🚗 10 km (12 min en voiture)<br>
+                    🗓️ <strong>Mercredi matin</strong> (8h – 13h)
+                </p>
+                <p>Marché traditionnel toute l'année autour de la cathédrale et le long des quais (étendu à la rue Ernest-Renan en été).</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🧺 Pleubian</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Centre+ville+22610+Pleubian" target="_blank" rel="noopener">Centre-ville, Pleubian</a><br>
+                    🚗 7 km (8 min en voiture)<br>
+                    🗓️ <strong>Samedi matin</strong> (8h – 13h)
+                </p>
+                <p>Un marché convivial et authentique au cœur de la Presqu'île Sauvage pour vos produits du samedi.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🧺 Penvénan</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Place+de+l'Eglise+22710+Penvenan" target="_blank" rel="noopener">Place de l'Église, Penvénan</a><br>
+                    🚗 18 km (20 min en voiture)<br>
+                    🗓️ <strong>Samedi matin</strong> (8h – 13h)
+                </p>
+                <p>Chaleureux marché dominé par le clocher du village, parfait pour s'approvisionner en arrivant pour le week-end.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🧺 Lannion</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Place+du+Centre+22300+Lannion" target="_blank" rel="noopener">Place du Centre &amp; Halles, Lannion</a><br>
+                    🚗 30 km (30 min en voiture)<br>
+                    🗓️ <strong>Grand marché le jeudi</strong> (8h – 13h)
+                </p>
+                <p>L'un des plus grands marchés des Côtes-d'Armor le jeudi. Petit marché sous les halles du mardi au samedi.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🧺 Perros-Guirec</h3>
+                <p class="restaurant-info">
+                    📍 <a href="https://maps.google.com/?q=Centre+ville+22700+Perros-Guirec" target="_blank" rel="noopener">Centre-ville &amp; La Clarté, Perros-Guirec</a><br>
+                    🚗 35 km (35 min en voiture)<br>
+                    🗓️ <strong>Vendredi matin</strong> (centre) &amp; <strong>Dimanche</strong> (La Clarté)
+                </p>
+                <p>Un cadre magnifique sur la Côte de Granit Rose pour flâner entre les étals artisanaux et gourmands.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- L'estuaire du Trieux -->
+<section id="trieux" style="background-color: #ffffff;">
+    <div class="container">
+        <h2 class="section-title">🌊 L'estuaire du Trieux &amp; le pays du Trégor</h2>
+        <p class="section-subtitle">Situé à Lézardrieux, au cœur de la Presqu'île Sauvage, notre gîte bénéficie d'une situation privilégiée au bord du Trieux. La commune abrite le seul port en eau profonde de la région, naturellement abrité des vents et des tempêtes.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🌉 Le pont de Lézardrieux &amp; sa Baie</h3>
+                <p class="restaurant-info">
+                    📍 Lézardrieux — 🚶 10 min à pied du gîte
+                </p>
+                <p>Véritable trait d'union entre le Trégor et le Goëlo, le pont suspendu offre un panorama exceptionnel sur l'estuaire. Rythmé par les marées, le bassin de 150 hectares accueille des parcs ostréicoles et des herbiers de zostères. C'est un refuge privilégié pour les oiseaux marins (bernaches cravants, tadornes de Belon, pluviers argentés) à observer depuis la rive.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>⚓ De la vallée du Trieux à l'estuaire du Jaudy</h3>
+                <p class="restaurant-info">
+                    📍 Entre Lézardrieux, Pontrieux et Tréguier
+                </p>
+                <p>En remontant vers Pontrieux, le Trieux serpente à travers de superbes vallées boisées et escarpées, réputées pour la pêche à la truite et au saumon. À quelques kilomètres vers Tréguier, l'estuaire du Jaudy offre des paysages sauvages classés en zone de protection européenne pour la faune aviaire.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🌉 Le pont Canada à Tréguier</h3>
+                <p class="restaurant-info">
+                    📍 Entre Tréguier et Trédarzec — 🚗 10 km (12 min en voiture)
+                </p>
+                <p>Reliant Tréguier à Trédarzec, l'historique pont Canada fut le premier ouvrage suspendu de ce type en Bretagne dès 1833. Reconstruit en béton armé à double arc après la Seconde Guerre mondiale et inauguré dans sa version actuelle en 1954, il offre un point de vue imprenable sur la cité épiscopale de Tréguier.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Quoi d'autre ? -->
+<section id="autre" style="background-color: #f9f9f9;">
+    <div class="container">
+        <h2 class="section-title">💡 Activités &amp; Expériences à découvrir</h2>
+        <p class="section-subtitle">Pêche à pied, promenades en mer, patrimoine ou sorties nature : voici quelques idées variées pour enrichir votre séjour à Lézardrieux.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🥾 Randonnées sur le GR34</h3>
+                <p>Le mythique « sentier des douaniers » longe l'ensemble du littoral. Historiquement utilisé pour patrouiller le long des côtes, il offre aujourd'hui des points de vue spectaculaires sur la mer et les criques sauvages.</p>
+                <p class="restaurant-info">
+                    👉 <a href="https://www.ffrandonnee.fr/randonner/sentiers/gr-34-le-sentier-des-douaniers" target="_blank" rel="noopener">Découvrir le tracé du GR34</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🥾 Boucles de randonnée locales</h3>
+                <p>De nombreux itinéraires balisés entourent Lézardrieux pour des balades à la demi-journée :</p>
+                <p class="restaurant-info">
+                    🔹 <a href="https://randobreizh.fr/randonnee-bretagne/cotes-darmor/pleudaniel/boucle-de-lestuaire-du-trieux/" target="_blank" rel="noopener">La boucle du Trieux</a><br>
+                    🔹 <a href="https://randobreizh.fr/randonnee-bretagne/cotes-darmor/lezardrieux/boucle-de-kesmouster/" target="_blank" rel="noopener">La boucle de Kermouster</a><br>
+                    🔹 <a href="https://randobreizh.fr/randonnee-bretagne/cotes-darmor/lezardrieux/boucle-de-kermaria/" target="_blank" rel="noopener">La boucle de Kermaria</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🥾 Randobreizh</h3>
+                <p>Un portail très complet pour trouver d'autres circuits de randonnée pédestre à proximité du gîte et sur l'ensemble de la Bretagne.</p>
+                <p class="restaurant-info">
+                    👉 <a href="https://www.randobreizh.fr" target="_blank" rel="noopener">Trouver une rando sur Randobreizh.fr</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🐎 Promenades à cheval</h3>
+                <p>Parcourez les paysages préservés de la presqu'île de Lézardrieux au rythme des chevaux, entre terre et mer.</p>
+                <p class="restaurant-info">
+                    👉 <a href="https://www.presquile-de-lezardrieux.com/index.php?codepage=104" target="_blank" rel="noopener">Centres équestres de la presqu'île</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🙋‍♂️ Rencontres avec les Greeters</h3>
+                <p>Partagez une balade gratuite avec un habitant bénévole pour découvrir les anecdotes, secrets et coins cachés de la presqu'île.</p>
+                <p class="restaurant-info">
+                    👉 <a href="https://www.presquile-de-lezardrieux.com/index.php?codepage=1100" target="_blank" rel="noopener">Réserver une balade avec un Greeter</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🎣 Pêche à pied</h3>
+                <p>Pratique incontournable des marées hautes et basses : ramassez palourdes, coques et crabes sur l'archipel de Bréhat ou dans l'estuaire. <em>Pensez à respecter les tailles réglementaires !</em></p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🚣 Kayak de mer &amp; Canoë</h3>
+                <p>Louez un kayak pour explorer l'estuaire du Trieux ou les labyrinthes rocheux du littoral breton.</p>
+                <p class="restaurant-info">
+                    📍 <a href="https://www.bretagne-cotedegranitrose.com/mes-envies/bord-de-mer/kayak-a-plougrescant/" target="_blank" rel="noopener">Kayak à Plougrescant</a><br>
+                    📍 <a href="https://larochederrien-canoekayak.com/" target="_blank" rel="noopener">Canoë-Kayak à La Roche-Derrien</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>⛵ Stages &amp; Sorties en voile</h3>
+                <p>Profitez du port de Lézardrieux et des écoles de voile environnantes pour vous initier au dériveur, au catamaran ou louer un voilier.</p>
+                <p class="restaurant-info">
+                    👉 <a href="https://www.petitfute.com/v8505-lezardrieux-22740/c1171-sports-loisirs/c290-loisirs-et-sports-nautiques/c293-voile/" target="_blank" rel="noopener">Clubs de voile à Lézardrieux</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🐠 Aquarium marin de Trégastel</h3>
+                <p>Niché au cœur de grottes de granit rose, cet aquarium unique présente la faune et la flore sous-marine de la Manche.</p>
+                <p class="restaurant-info">
+                    👉 <a href="https://www.aquarium-tregastel.com/" target="_blank" rel="noopener">Visiter l'Aquarium de Trégastel</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🚂 Le Vapeur du Trieux</h3>
+                <p>Embarquez à bord d'un authentique train à vapeur reliant Paimpol à Pontrieux le long de la vallée boisée du Trieux.</p>
+                <p class="restaurant-info">
+                    👉 <a href="https://www.vapeurdutrieux.com/" target="_blank" rel="noopener">Horaires &amp; Billetterie Vapeur du Trieux</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>⛴️ Navettes pour l'île de Bréhat</h3>
+                <p>Réservez votre traversée directe ou une croisière guidée pour faire le tour complet de l'archipel de Bréhat en bateau.</p>
+                <p class="restaurant-info">
+                    👉 <a href="https://www.vedettesdebrehat.com/-Traversee-tour-de-l-ile-de-Brehat-" target="_blank" rel="noopener">Vedettes de Bréhat</a>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🏴‍☠️ Sorties en vieux gréements</h3>
+                <p>Vivez une aventure maritime authentique en embarquant sur des voiliers traditionnels bretons comme l'Enez Koalen ou La Nébuleuse.</p>
+                <p class="restaurant-info">
+                    👉 <a href="https://www.voilestraditions.fr/bateaux/enez-koalen/" target="_blank" rel="noopener">Embarquer sur Enez Koalen</a><br>
+                    👉 <a href="https://www.voilestraditions.fr/bateaux/la-nebuleuse/" target="_blank" rel="noopener">Naviguer sur La Nébuleuse</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="infos" style="padding: 3rem 0; background: #ffffff;">
+    <div class="container" style="max-width: 800px;">
+        <h2 style="color: var(--primary); text-align: center; margin-bottom: 1.5rem;">Infos pratiques</h2>
+
+        <h3 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Tarifs</h3>
+        <p style="text-align: left; margin-bottom: 0.75rem;">60 € la nuit en tarif normal, 70 € pendant les vacances scolaires (toutes zones confondues). 10 % de réduction à partir d'une semaine de location. Taxe de séjour en supplément. Un acompte de 20 % du montant du séjour est demandé pour bloquer les dates ; le solde est à régler à l'arrivée. Séjour de 3 nuits minimum. Le gîte se loue toute l'année.</p>
+
+        <h3 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Capacité</h3>
+        <p style="text-align: left; margin-bottom: 0.75rem;">Le gîte accueille 1 à 2 personnes. Un lit bébé pliant est prêté sur demande.</p>
+
+        <h3 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Arrivée et départ</h3>
+        <p style="text-align: left; margin-bottom: 0.75rem;">Arrivée à 15 heures - Départ à 10 heures</p>
+
+        <h3 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Chauffage</h3>
+        <p style="text-align: left; margin-bottom: 0.75rem;">En hiver, quelques bûches de bois pour les inserts peuvent être fournies sur demande.</p>
+        <h3 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Animaux</h3>
+        <p style="text-align: left; margin-bottom: 0.75rem;">Les animaux ne sont pas acceptés dans le gîte.</p>
+    </div>
+</section>
+
+<!-- Section Les 4 Saisons -->
+<section id="saisons" style="background-color: #ffffff;">
+    <div class="container">
+        <h2 class="section-title">Les quatre saisons en Côtes-d'Armor</h2>
+        <p class="section-subtitle">Au fil des saisons, les lumières et les paysages de la Presqu'île Sauvage se métamorphosent.<br>Un climat estival doux et agréable pour échapper aux canicules, et des paysages marins spectaculaires tout au long de l'année.</p>
+
+        <div class="seasons-grid">
+            <!-- Printemps -->
+            <div class="season-card">
+                <div class="season-header">
+                    <div class="mini-slider" id="slider-printemps">
+                        <img loading="lazy" decoding="async" src="../images/printemps_1000_brehat.jpg" class="mini-slide active" alt="Porte fleurie traditionnelle sur l'île de Bréhat au printemps">
+                        <img loading="lazy" decoding="async" src="../images/printemps_1000_2.jpg" class="mini-slide" alt="Agapanthes en fleurs au bord de la mer à marée basse">
+                        <img loading="lazy" decoding="async" src="../images/printemps_1000_4.jpg" class="mini-slide" alt="Panorama printanier sur l'estuaire du Trieux à Lézardrieux">
+                        <img loading="lazy" decoding="async" src="../images/printemps_1000_1.jpg" class="mini-slide" alt="Pique-nique en bord de mer dès les beaux jours en Bretagne">
+                        <img loading="lazy" decoding="async" src="../images/printemps_1000_5.jpg" class="mini-slide" alt="Agapanthes bleues emblématiques du littoral breton">
+
+                        <button type="button" class="mini-prev" aria-label="Image précédente" onclick="changeMiniSlide('slider-printemps', -1)">&lt;</button>
+                        <button type="button" class="mini-next" aria-label="Image suivante" onclick="changeMiniSlide('slider-printemps', 1)">&gt;</button>
+                    </div>
+                    <span class="season-badge">🌸 Printemps</span>
+                </div>
+                <div class="season-content">
+                    <h3>Éveil de la nature &amp; Floraisons</h3>
+                    <p>Découvrez l'île de Bréhat en pleine floraison, profitez des températures douces pour randonner sur le GR34 et observez le réveil du port de plaisance de Lézardrieux.</p>
+                </div>
+            </div>
+
+            <!-- Été -->
+            <div class="season-card">
+                <div class="season-header">
+                    <div class="mini-slider" id="slider-ete">
+                        <img loading="lazy" decoding="async" src="../images/ete-port.jpg" class="mini-slide active" alt="Vue estivale sur le port de Lézardrieux et la plage">
+                        <img loading="lazy" decoding="async" src="../images/ete1000-7.jpg" class="mini-slide" alt="Baignade et vue mer dans l'estuaire du Trieux">
+                        <img loading="lazy" decoding="async" src="../images/ete1000-8.jpg" class="mini-slide" alt="Littoral ensoleillé à Plougrescant">
+                        <img loading="lazy" decoding="async" src="../images/ete1000-amoureux.jpg" class="mini-slide" alt="Rocher des amoureux près du Gouffre de Plougrescant">
+                        <img loading="lazy" decoding="async" src="../images/ete1000-bateau.jpg" class="mini-slide" alt="Voiliers au large de l'archipel de Bréhat">
+                        <img loading="lazy" decoding="async" src="../images/ete1000-pecheapied.jpg" class="mini-slide" alt="Pêche à pied à marée basse à Lézardrieux">
+                        <img loading="lazy" decoding="async" src="../images/ete1000-phare.jpg" class="mini-slide" alt="Phare maritime des Côtes-d'Armor sous le soleil">
+                        <img loading="lazy" decoding="async" src="../images/ete1000-soleil.jpg" class="mini-slide" alt="Coucher de soleil d'été sur l'estuaire du Trieux">
+                        <img loading="lazy" decoding="async" src="../images/ete1000-soleil2.jpg" class="mini-slide" alt="Lumière du soir sur la baie de Lézardrieux">
+                        <img loading="lazy" decoding="async" src="../images/ete1000-velo.jpg" class="mini-slide" alt="Balade à vélo sur les petites routes de la presqu'île">
+
+                        <button type="button" class="mini-prev" aria-label="Image précédente" onclick="changeMiniSlide('slider-ete', -1)">&lt;</button>
+                        <button type="button" class="mini-next" aria-label="Image suivante" onclick="changeMiniSlide('slider-ete', 1)">&gt;</button>
+                    </div>
+                    <span class="season-badge">☀️ Été</span>
+                </div>
+                <div class="season-content">
+                    <h3>Baignades &amp; Douceur de vivre</h3>
+                    <p>Profitez des plaisirs nautiques (kayak, voile, pêche à pied), des marchés locaux, des traversées vers Bréhat et des températures agréables au bord de la mer.</p>
+                </div>
+            </div>
+
+            <!-- Automne -->
+            <div class="season-card">
+                <div class="season-header">
+                    <div class="mini-slider" id="slider-automne">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-lezard2.jpg" class="mini-slide active" alt="Atmosphère automnale depuis le gîte à Lézardrieux">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-2.jpg" class="mini-slide" alt="Le port de Lézardrieux sous les lumières d'automne">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-4.jpg" class="mini-slide" alt="Lumière rasante d'automne sur la mer en Côtes-d'Armor">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-5.jpg" class="mini-slide" alt="Ciel dégagé d'automne sur la côte bretonne">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-7.jpg" class="mini-slide" alt="Rives du Trieux aux couleurs automnales">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-8.jpg" class="mini-slide" alt="Randonnée paisible sur le sentier GR34 en automne">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-9.jpg" class="mini-slide" alt="Coucher de soleil doré vers Lézardrieux">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-brehat1.jpg" class="mini-slide" alt="Bateaux au repos à marée basse sur l'île de Bréhat">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-brehat2.jpg" class="mini-slide" alt="Rochers de granit rose de Bréhat sous la lumière d'automne">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-brehat3.jpg" class="mini-slide" alt="Estuaire calme à marée basse en automne">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-brehat4.jpg" class="mini-slide" alt="Paysage insulaire préservé sur Bréhat">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-brehat5.jpg" class="mini-slide" alt="Bateau de pêche traditionnelle au large de Bréhat">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-lezard1.jpg" class="mini-slide" alt="Les couleurs de l'automne à Lézardrieux">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-treguier.jpg" class="mini-slide" alt="Port historique de Tréguier en automne">
+                        <img loading="lazy" decoding="async" src="../images/automne1000-treguier1.jpg" class="mini-slide" alt="Vue sur les quais de Tréguier">
+
+                        <button type="button" class="mini-prev" aria-label="Image précédente" onclick="changeMiniSlide('slider-automne', -1)">&lt;</button>
+                        <button type="button" class="mini-next" aria-label="Image suivante" onclick="changeMiniSlide('slider-automne', 1)">&gt;</button>
+                    </div>
+                    <span class="season-badge">🍂 Automne</span>
+                </div>
+                <div class="season-content">
+                    <h3>Lumières fauves &amp; Quiétude</h3>
+                    <p>Couleurs chatoyantes sur les rives du Trieux, quiétude retrouvée sur les sentiers côtiers et saison idéale pour déguster les coquilles Saint-Jacques de la baie.</p>
+                </div>
+            </div>
+
+            <!-- Hiver -->
+            <div class="season-card">
+                <div class="season-header">
+                    <div class="mini-slider" id="slider-hiver">
+                        <img loading="lazy" decoding="async" src="../images/hiver_1000.jpg" class="mini-slide active" alt="Paysage marin sauvage en hiver en Bretagne">
+                        <img loading="lazy" decoding="async" src="../images/hiver_1000_3.jpg" class="mini-slide" alt="Bord de mer paisible vers Lézardrieux en hiver">
+                        <img loading="lazy" decoding="async" src="../images/hiver_1000_4.jpg" class="mini-slide" alt="Vagues et tempête hivernale le long des rochers bretons">
+                        <img loading="lazy" decoding="async" src="../images/hiver_1000_5.jpg" class="mini-slide" alt="Atmosphère iodée et ciels contrastés d'hiver">
+                        <img loading="lazy" decoding="async" src="../images/hiver_1000_6.jpg" class="mini-slide" alt="Spectacle de la mer démontée au large du Trieux">
+
+                        <button type="button" class="mini-prev" aria-label="Image précédente" onclick="changeMiniSlide('slider-hiver', -1)">&lt;</button>
+                        <button type="button" class="mini-next" aria-label="Image suivante" onclick="changeMiniSlide('slider-hiver', 1)">&gt;</button>
+                    </div>
+                    <span class="season-badge">❄️ Hiver</span>
+                </div>
+                <div class="season-content">
+                    <h3>Spectacle de la mer &amp; Cocooning</h3>
+                    <p>Spectacle grandiose des grandes marées et des tempêtes hivernales, sérénité absolue du littoral, puis la chaleur du gîte au coin du feu après la balade.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+<!-- Pied de page -->
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Location Vacances Lézardrieux – Le Gîte du Pêcheur. Tous droits réservés.</p>
+        <p><a href="#accueil" style="color: var(--primary); text-decoration: none;">Retour en haut de page ↑</a></p>
+    </div>
+</footer>
+
+    <!-- Script JavaScript du Diaporama fluide en boucle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const slidesContainer = document.getElementById('slider');
+        if (!slidesContainer) return;
+        const originalSlides = Array.from(slidesContainer.children);
+        const totalOriginals = originalSlides.length;
+        const dots = document.querySelectorAll('.dot');
+        
+        // Cloner la 1ere et la derniere slide pour la boucle continue
+        const firstClone = originalSlides[0].cloneNode(true);
+        const lastClone = originalSlides[totalOriginals - 1].cloneNode(true);
+        
+        slidesContainer.appendChild(firstClone);
+        slidesContainer.insertBefore(lastClone, originalSlides[0]);
+        
+        let currentIndex = 1;
+        let isTransitioning = false;
+        let transitionSafety;
+        let autoSlideInterval;
+        let paused = false;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const box = document.querySelector('.slider-container');
+        ['mouseenter', 'focusin'].forEach(e => box.addEventListener(e, () => { paused = true; }));
+        ['mouseleave', 'focusout'].forEach(e => box.addEventListener(e, () => { paused = false; }));
+
+        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        function updateDots(realIndex) {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === realIndex);
+            });
+        }
+
+            window.moveSlide = function(step) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            clearTimeout(transitionSafety);
+            transitionSafety = setTimeout(() => { isTransitioning = false; }, 700);
+            
+            currentIndex += step;
+            slidesContainer.style.transition = 'transform 0.5s ease-in-out';
+            slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            let realIndex = (currentIndex - 1 + totalOriginals) % totalOriginals;
+            updateDots(realIndex);
+            resetTimer();
+        }
+
+            window.currentSlide = function(index) {
+            if (isTransitioning || index + 1 === currentIndex) return;
+            isTransitioning = true;
+            clearTimeout(transitionSafety);
+            transitionSafety = setTimeout(() => { isTransitioning = false; }, 700);
+            
+            currentIndex = index + 1;
+            slidesContainer.style.transition = 'transform 0.5s ease-in-out';
+            slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateDots(index);
+            resetTimer();
+        }
+
+        slidesContainer.addEventListener('transitionend', () => {
+            clearTimeout(transitionSafety);
+            isTransitioning = false;
+            if (currentIndex === totalOriginals + 1) {
+                slidesContainer.style.transition = 'none';
+                currentIndex = 1;
+                slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            } else if (currentIndex === 0) {
+                slidesContainer.style.transition = 'none';
+                currentIndex = totalOriginals;
+                slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+        });
+
+        function startTimer() {
+            autoSlideInterval = setInterval(() => { if (!paused && !reduceMotion && !document.hidden) moveSlide(1); }, 5000);
+        }
+
+        function resetTimer() {
+            clearInterval(autoSlideInterval);
+            startTimer();
+        }
+
+        startTimer();
+
+        window.changeMiniSlide = function(sliderId, direction) {
+            const slider = document.getElementById(sliderId);
+            if (!slider) return;
+            
+            const slides = slider.querySelectorAll('.mini-slide');
+            let activeIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+            if (activeIndex === -1) activeIndex = 0; // Sécurité si aucune classe active au départ
+
+slides[activeIndex].classList.remove('active');
+            
+            let newIndex = activeIndex + direction;
+            if (newIndex >= slides.length) newIndex = 0;
+            if (newIndex < 0) newIndex = slides.length - 1;
+            
+            slides[newIndex].classList.add('active');
+};
+    });
+    </script>
+ 
+ <!-- Données structurées SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VacationRental",
+  "identifier": "gite-du-pecheur-lezardrieux",
+  "name": "Location Vacances Lézardrieux - Le Gîte du Pêcheur",
+  "description": "Gîte de charme pour 2 personnes à Lézardrieux en Côtes-d'Armor, à proximité du GR34, de Paimpol et de l'île de Bréhat.",
+  "url": "https://patrick-montreuil.pages-perso.free.fr/fr/",
+  "image": [
+    "https://patrick-montreuil.pages-perso.free.fr/images/facade.jpg",
+    "https://patrick-montreuil.pages-perso.free.fr/images/salon-bas.jpg",
+    "https://patrick-montreuil.pages-perso.free.fr/images/salon-haut.png",
+    "https://patrick-montreuil.pages-perso.free.fr/images/chambre.jpg",
+    "https://patrick-montreuil.pages-perso.free.fr/images/jardin.jpg",
+    "https://patrick-montreuil.pages-perso.free.fr/images/ete-port.jpg",
+    "https://patrick-montreuil.pages-perso.free.fr/images/automne1000-lezard1.jpg",
+    "https://patrick-montreuil.pages-perso.free.fr/images/hiver_1000.jpg"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rue des Roitelets",
+    "addressLocality": "Lézardrieux",
+    "postalCode": "22740",
+    "addressRegion": "Côtes-d'Armor",
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 48.786,
+    "longitude": -3.102
+  },
+  "containsPlace": {
+    "@type": "Accommodation",
+    "numberOfRooms": 1,
+    "numberOfBedrooms": 1,
+    "numberOfBathroomsTotal": 1,
+    "bed": "1 lit double ; 1 canapé-lit simple sur demande",
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Jardin clos" },
+      { "@type": "LocationFeatureSpecification", "name": "Terrasse" },
+      { "@type": "LocationFeatureSpecification", "name": "Cheminée / poêle à bois" },
+      { "@type": "LocationFeatureSpecification", "name": "Parking" }
+    ],
+    "occupancy": {
+      "@type": "QuantitativeValue",
+      "value": 2,
+      "maxValue": 2
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.28",
+    "reviewCount": "29",
+    "bestRating": "5"
+  },
+  "email": "lesgitesdupecheur.lezardrieux@gmail.com"
+}
+</script>
+
+<!-- Script FullCalendar : lit /disponibilites.json (aucun lien iCal privé dans la page) -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var el = document.getElementById('calendar');
+    if (!el || typeof FullCalendar === 'undefined') return;
+    var calendar = new FullCalendar.Calendar(el, {
+        initialView: 'dayGridMonth', locale: 'fr', firstDay: 1,
+        headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
+        buttonText: { today: "Aujourd'hui" }, height: 'auto'
+    });
+    calendar.render();
+    fetch('/disponibilites.json', { cache: 'no-cache' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (periods) {
+            periods.forEach(function (p) {
+                calendar.addEvent({ title: 'Occupé', start: p.start, end: p.end, allDay: true, display: 'background', backgroundColor: '#e74c3c' });
+            });
+        })
+        .catch(function () {
+            var n = document.getElementById('calendar-note');
+            if (n) n.textContent = 'Calendrier momentanément indisponible : contactez-nous pour connaître les disponibilités.';
+        });
+});
+
+// Formulaire : dates cohérentes
+(function () {
+    var a = document.getElementById('checkin'), d = document.getElementById('checkout');
+    if (!a || !d) return;
+    var today = new Date().toISOString().split('T')[0];
+    a.min = today; d.min = today;
+    a.addEventListener('change', function () {
+        if (!a.value) return;
+        var n = new Date(a.value); n.setDate(n.getDate() + 1);
+        d.min = n.toISOString().split('T')[0];
+        if (d.value && d.value <= a.value) d.value = '';
+    });
+})();
+</script>
+
+<!-- Envoi du formulaire sans quitter la page, puis redirection vers la page de remerciement -->
+<script>
+(function () {
+    var form = document.querySelector('form.form-reservation');
+    if (!form || !window.fetch) return;
+    var msg = document.createElement('p');
+    msg.setAttribute('role', 'alert');
+    msg.style.cssText = 'margin-top: 1rem; text-align: center; font-weight: 600;';
+    form.appendChild(msg);
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('.btn-submit');
+        btn.disabled = true; btn.textContent = 'Envoi en cours…'; msg.textContent = '';
+        var data = {};
+        new FormData(form).forEach(function (v, k) { if (k !== '_next' && k !== '_captcha') data[k] = v; });
+        fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (res.success === 'true' || res.success === true) { window.location.href = '/fr/merci.html'; }
+            else { throw new Error('echec'); }
+        })
+        .catch(function () {
+            btn.disabled = false; btn.textContent = 'Envoyer ma demande';
+            msg.style.color = '#b91c1c';
+            msg.textContent = "L'envoi a échoué. Réessayez ou écrivez-nous directement par e-mail.";
+        });
+    });
+})();
+</script>
+
+</body>
+</html>

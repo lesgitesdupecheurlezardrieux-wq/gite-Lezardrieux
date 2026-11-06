@@ -1,0 +1,28 @@
+name: Synchroniser le calendrier
+
+on:
+  schedule:
+    - cron: '17 * * * *'   # toutes les heures, à la minute 17
+  workflow_dispatch:        # permet aussi de le lancer à la main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Générer disponibilites.json
+        env:
+          ICAL_URLS: ${{ secrets.ICAL_URLS }}
+        run: python3 sync_calendrier.py disponibilites.json
+
+      - name: Envoyer le fichier sur Free
+        env:
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+        run: |
+          curl --fail --silent --show-error \
+            -T disponibilites.json \
+            --user "$FTP_USER:$FTP_PASS" \
+            "ftp://ftpperso.free.fr/disponibilites.json"
