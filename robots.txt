@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://patrick-montreuil.pages-perso.free.fr/sitemap.xml
+Sitemap: https://locations-vacances-lezardrieux.fr/sitemap.xml
